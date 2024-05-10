@@ -1,88 +1,51 @@
-// This file contains type definitions for your data.
-// It describes the shape of the data, and what data type each property should accept.
-// For simplicity of teaching, we're manually defining these types.
-// However, these types are generated automatically if you're using an ORM such as Prisma.
 export type User = {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
+    id: string;
+    name: string;
+    email: string;
+    ttrpg_link: 'dnd-beyond-link';
+    role: 'Player' | 'Game Master';
 };
 
-export type Customer = {
-  id: string;
-  name: string;
-  email: string;
-  image_url: string;
-};
+export type Reference = {
+    id: string;
+    image_url: string;
+    name: string;
+    description: string;
+}
 
-export type Invoice = {
-  id: string;
-  customer_id: string;
-  amount: number;
-  date: string;
-  // In TypeScript, this is called a string union type.
-  // It means that the "status" property can only be one of the two strings: 'pending' or 'paid'.
-  status: 'pending' | 'paid';
-};
+export type Character = {
+    type: 'PC' | 'NPC' | 'Deity' | 'Familiar' | 'Pet';
+    basic_info: BasicCharacterInfo;
+}
 
-export type Revenue = {
-  month: string;
-  revenue: number;
-};
+export type BasicCharacterInfo = {
+    id: string;
+    name: string;
+    surname: string;
+    alias: string;
+    age: string;
+    race: 'Aarakocra' | 'Aasimar' | 'Air Genasi' | 'Bugbear' | 'Centaur' | 'Changeling' | 'Dragonborn' | 'Chromatic Dragonborn' | 'Gem Dragonborn' | 'Metallic Dragonborn' | 'Duergar' | 'Hill Dwarf' | 'Mountain Dwarf' | 'Earth Genasi' | 'Eladrin' | 'High Elf' | 'Wood Elf' | 'Eladrin Elf' | 'Dark Elf' | 'Fairy' | 'Firbolg' | 'Fire Genasi' | 'Githyanki' | 'Githzerai' | 'Rock Gnome' | 'Forest Gnome' | 'Deep Gnome' | 'Goblin' | 'Goliath' | 'Half-Elf' | 'Half-Orc' | 'Lightfoot Halfling' | 'Stout Halfling' | 'Harengon' | 'Hobgoblin' | 'Human' | 'Variant Human' | 'Kenku' | 'Kobold' | 'Dhampir Lineage' | 'Hexblood Lineage' | 'Reborn Lineage' | 'Lizardfolk' | 'Minotaur' | 'Orc' | 'Satyr' | 'Sea Elf' | 'Shadar-kai' | 'Shifter' | 'Tabaxi' | 'Tiefling' | 'Tortle' | 'Triton' | 'Variant Aasimar' | 'Water Genasi' | 'Yuan-ti';
+    classes: Class[];
+    gender: string;
+    pronouns: string;
+    alignment: 'Lawful Good' | 'Neutral Good' | 'Chaotic Good' | 'Lawful Neutral' | 'True Neutral' | 'Chaotic Neutral' | 'Lawful Evil' | 'Neutral Evil' | 'Chaotic Evil';
+    appearance: Appearance;
+    references: Reference[];
+}
 
-export type LatestInvoice = {
-  id: string;
-  name: string;
-  image_url: string;
-  email: string;
-  amount: string;
-};
+export type Class = {
+    name: 'Artificer' | 'Barbarian' | 'Bard' | 'Blood Hunter' | 'Cleric' | 'Druid' | 'Fighter' | 'Monk' | 'Paladin' | 'Ranger' | 'Rogue' | 'Sorcerer' | 'Warlock' | 'Wizard';
+}
 
-// The database returns a number for amount, but we later format it to a string with the formatCurrency function
-export type LatestInvoiceRaw = Omit<LatestInvoice, 'amount'> & {
-  amount: number;
-};
+export type Appearance = {
+    
+}
+export type Arc = {
+    acts: Act[];
+}
+export type Act = {
+    
+}
 
-export type InvoicesTable = {
-  id: string;
-  customer_id: string;
-  name: string;
-  email: string;
-  image_url: string;
-  date: string;
-  amount: number;
-  status: 'pending' | 'paid';
-};
 
-export type CustomersTableType = {
-  id: string;
-  name: string;
-  email: string;
-  image_url: string;
-  total_invoices: number;
-  total_pending: number;
-  total_paid: number;
-};
 
-export type FormattedCustomersTable = {
-  id: string;
-  name: string;
-  email: string;
-  image_url: string;
-  total_invoices: number;
-  total_pending: string;
-  total_paid: string;
-};
-
-export type CustomerField = {
-  id: string;
-  name: string;
-};
-
-export type InvoiceForm = {
-  id: string;
-  customer_id: string;
-  amount: number;
-  status: 'pending' | 'paid';
-};
